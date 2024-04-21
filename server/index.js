@@ -1,4 +1,6 @@
 const express = require("express");
+const { secp256k1 } = require("ethereum-cryptography/secp256k1.js"); 
+
 const app = express();
 const cors = require("cors");
 const port = 3042;
@@ -7,9 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 const balances = {
-  "0x1": 100,
-  "0x2": 50,
-  "0x3": 75,
+  '4c4d1892d4fb76a9dac7': 100,
+  'ae85ac3feb20845c7bdb': 50,
+  '146c8deb6e39f7d98928': 75,
 };
 
 app.get("/balance/:address", (req, res) => {
@@ -20,7 +22,7 @@ app.get("/balance/:address", (req, res) => {
 
 app.post("/send", (req, res) => {
   const { sender, recipient, amount } = req.body;
-
+  console.log({sender, recipient, amount})
   setInitialBalance(sender);
   setInitialBalance(recipient);
 

@@ -84,3 +84,13 @@ input {
   display: flex;
   flex-direction: column;
 }
+
+.transactions{
+  display: flex;
+  gap: 20px;
+  margin: 30px;
+  .block{
+    padding: 40px;
+    background-color: white;
+  }
+}

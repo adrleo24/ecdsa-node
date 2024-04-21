@@ -1,11 +1,17 @@
 import { useState } from "react";
 import server from "./server";
 
-function Transfer({ address, setBalance }) {
+function Transfer({ address, setBalance, transactions, setTransactions }) {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
 
   const setValue = (setter) => (evt) => setter(evt.target.value);
+  const time = new Date().toLocaleString();
+  // idx
+  // time
+  // sender
+  // recipient
+  // amount
 
   async function transfer(evt) {
     evt.preventDefault();
@@ -19,7 +25,11 @@ function Transfer({ address, setBalance }) {
         recipient,
       });
       setBalance(balance);
+      const txn = { time, sender: address, recipient, amount: sendAmount, index: transactions.length };
+      console.log({ txn });
+      setTransactions((transactions) => [...transactions, txn]);
     } catch (ex) {
+      console.log({ ex });
       alert(ex.response.data.message);
     }
   }
